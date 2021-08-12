@@ -23,6 +23,15 @@ public class AppManager : MonoBehaviour
         _instance = this;
     }
 
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Debug.Log("App Finished!");
+            Application.Quit();
+        }
+    }
+
     /// <summary>
     /// Place object in Virtual mode
     /// </summary>
