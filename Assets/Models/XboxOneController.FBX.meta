@@ -3,7 +3,12 @@ guid: abafff2d714ab6a4280ee16782311f92
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: xboxController
+    second: {fileID: 2100000, guid: 4aff55681b0b1664a91c5bdeaa1a4259, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
