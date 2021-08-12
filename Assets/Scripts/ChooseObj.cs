@@ -10,21 +10,8 @@ public class ChooseObj : MonoBehaviour
     [SerializeField] GameObject choose_2nd_obj;
 
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     /// <summary>
-    /// 
+    /// Choose Object
     /// </summary>
     /// <param name="val">
     /// false => 1st obj
@@ -32,7 +19,7 @@ public class ChooseObj : MonoBehaviour
     /// </param>
     public void ChooseObject(bool val)
     {
-        AppManager._instance.selectedObj = val;
+        AppManager._instance.selectedObjType = val;
         switch (val)
         {
             case false:
@@ -44,6 +31,11 @@ public class ChooseObj : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Getting Ready the object to show
+    /// </summary>
+    /// <param name="choosedObj"></param>
+    /// <param name="releasedObj"></param>
     void GetReadyObj(GameObject choosedObj, GameObject releasedObj)
     {
         choosedObj.GetComponent<Image>().color = UIController._instance.colGreen;
@@ -52,6 +44,9 @@ public class ChooseObj : MonoBehaviour
         UIController._instance.GetReadyBtnShowObj();
     }
 
+    /// <summary>
+    /// Release Choosed Object
+    /// </summary>
     public void ReleaseSeletedObjects()
     {
         choose_1st_obj.GetComponent<Image>().color = UIController._instance.colWhite;
@@ -60,6 +55,9 @@ public class ChooseObj : MonoBehaviour
 }
 
 
+/// <summary>
+/// To expand project for online system and integration with back-api
+/// </summary>
 public class PlaceObj : MonoBehaviour
 {
     public Sprite sprite_1;

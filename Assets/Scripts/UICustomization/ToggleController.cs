@@ -53,54 +53,50 @@ public class ToggleController : MonoBehaviour
 		{
 			toggleBgImage.color = onColorBg;
 			handleTransform.localPosition = new Vector3(onPosX, 0f, 0f);
-			//onIcon.gameObject.SetActive(true);
-			//offIcon.gameObject.SetActive(false);
 		}
 		else
 		{
 			toggleBgImage.color = offColorBg;
 			handleTransform.localPosition = new Vector3(offPosX, 0f, 0f);
-			//onIcon.gameObject.SetActive(false);
-			//offIcon.gameObject.SetActive(true);
 		}
 	}
 		
 	void Update()
 	{
-
 		if(switching)
 		{
 			Toggle(isOn);
 		}
 	}
 
+	/// <summary>
+	/// Show the changed Object by Switching
+	/// </summary>
 	public void DoYourStaff()
 	{
-		Debug.Log(isOn);
+		Debug.Log("Obj type: " + isOn);
+		AppManager._instance._placedObj.GetComponent<ModelDummy>().ChangeObj(!isOn);
 	}
 
+	/// <summary>
+	/// Switching Object by Toggle Action
+	/// </summary>
 	public void Switching()
 	{
 		switching = true;
 	}
-		
 
-
+	/// <summary>
+	/// Toggle Action body
+	/// </summary>
+	/// <param name="toggleStatus"></param>
 	public void Toggle(bool toggleStatus)
 	{
-		//if(!onIcon.activeSelf || !offIcon.activeSelf)
-		//{
-		//	onIcon.SetActive(true);
-		//	offIcon.SetActive(true);
-		//}
-		
 		if(toggleStatus)
 		{
 			toggleBgImage.color = SmoothColor(onColorBg, offColorBg);
 			onIcon.GetComponent<Text>().color = SmoothColor(offColorTxt, onColorTxt);
 			offIcon.GetComponent<Text>().color = SmoothColor(onColorTxt, offColorTxt);
-			//Transparency (onIcon, 1f, 0f);
-			//Transparency (offIcon, 0f, 1f);
 			handleTransform.localPosition = SmoothMove(handle, onPosX, offPosX);
 		}
 		else 
@@ -108,13 +104,18 @@ public class ToggleController : MonoBehaviour
 			toggleBgImage.color = SmoothColor(offColorBg, onColorBg);
 			onIcon.GetComponent<Text>().color = SmoothColor(onColorTxt, offColorTxt);
 			offIcon.GetComponent<Text>().color = SmoothColor(offColorTxt, onColorTxt);
-			//Transparency (onIcon, 0f, 1f);
-			//Transparency (offIcon, 1f, 0f);
 			handleTransform.localPosition = SmoothMove(handle, offPosX, onPosX);
 		}
 			
 	}
 
+	/// <summary>
+	/// Move to targetPos smoothly
+	/// </summary>
+	/// <param name="toggleHandle"></param>
+	/// <param name="startPosX"></param>
+	/// <param name="endPosX"></param>
+	/// <returns></returns>
 	Vector3 SmoothMove(GameObject toggleHandle, float startPosX, float endPosX)
 	{
 		Vector3 position = new Vector3 (Mathf.Lerp(startPosX, endPosX, t += speed * Time.deltaTime), 0f, 0f);
@@ -122,6 +123,12 @@ public class ToggleController : MonoBehaviour
 		return position;
 	}
 
+	/// <summary>
+	/// Change to targetColor Smoothly
+	/// </summary>
+	/// <param name="startCol"></param>
+	/// <param name="endCol"></param>
+	/// <returns></returns>
 	Color SmoothColor(Color startCol, Color endCol)
 	{
 		Color resultCol;
@@ -129,6 +136,13 @@ public class ToggleController : MonoBehaviour
 		return resultCol;
 	}
 
+	/// <summary>
+	/// Change to target Alpha Smoothly, gameobject should have CanvasGroup to implement this action.
+	/// </summary>
+	/// <param name="alphaObj"></param>
+	/// <param name="startAlpha"></param>
+	/// <param name="endAlpha"></param>
+	/// <returns></returns>
 	CanvasGroup Transparency (GameObject alphaObj, float startAlpha, float endAlpha)
 	{
 		CanvasGroup alphaVal;
@@ -137,6 +151,10 @@ public class ToggleController : MonoBehaviour
 		return alphaVal;
 	}
 
+
+	/// <summary>
+	/// Stop switching after actionTime
+	/// </summary>
 	void StopSwitching()
 	{
 		if(t > 1.0f)
@@ -159,5 +177,4 @@ public class ToggleController : MonoBehaviour
 
 		}
 	}
-
 }

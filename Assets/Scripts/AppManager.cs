@@ -10,7 +10,7 @@ public class AppManager : MonoBehaviour
 
     public GameObject _placedObj = null;
 
-    public bool selectedObj;
+    public bool selectedObjType;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +30,7 @@ public class AppManager : MonoBehaviour
     {
         GameObject go = Instantiate(_prefab, new Vector3(0f, 0f, -3f), Quaternion.identity);
         _placedObj = go;
+        go.GetComponent<ModelDummy>().ChangeObj(selectedObjType);
     }
 
     /// <summary>
@@ -42,5 +43,19 @@ public class AppManager : MonoBehaviour
     {
         GameObject go = Instantiate(_prefab, targetPos, Quaternion.identity);
         _placedObj = go;
+        go.GetComponent<ModelDummy>().ChangeObj(selectedObjType);
+    }
+
+
+    /// <summary>
+    /// Clear Objects
+    /// </summary>
+    public void ClearObjs()
+    {
+        if (_placedObj != null)
+        {
+            Destroy(_placedObj);
+        }
+        _placedObj = null;
     }
 }

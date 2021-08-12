@@ -8,16 +8,22 @@ public class ModelDummy : MonoBehaviour
 
     public GameObject object2;
 
-    private void Start()
+    /// <summary>
+    /// Switching Object
+    /// </summary>
+    /// <param name="val"></param>
+    public void ChangeObj(bool val)
     {
-        if (!AppManager._instance.selectedObj)
+        AppManager._instance.selectedObjType = val;
+        if (!AppManager._instance.selectedObjType)
         {
             object1.SetActive(true);
-            object1.SetActive(false);
-        } else
+            object2.SetActive(false);
+        }
+        else
         {
             object1.SetActive(false);
-            object1.SetActive(true);
+            object2.SetActive(true);
         }
     }
 }
